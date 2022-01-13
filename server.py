@@ -29,8 +29,16 @@ def index():
 
 @app.route('/showSummary', methods=['POST'])
 def show_summary():
-    club = [club for club in clubs if club['email'] == request.form['email']][0]
-    return render_template('welcome.html', club=club, competitions=competitions)
+    """
+    Allow use to login to the site if the email is in the database
+    :return: OK only if the email is in the database, else throw an error
+    """
+    try:
+        club = [club for club in clubs if club['email'] == request.form['email']][0]
+        return render_template('welcome.html', club=club, competitions=competitions)
+    except IndexError:
+        flash('Email is invalid. Please try again.')
+        return render_template('index.html')
 
 
 @app.route('/book/<competition>/<club>')
