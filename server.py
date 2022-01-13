@@ -64,6 +64,8 @@ def purchase_places():
 
     if datetime.now() > datetime.strptime(competition["date"], "%Y-%m-%d %H:%M:%S"):
         flash('You cannot purchase places from past competition')
+    elif places_required > 12:
+        flash('You cannot purchase more than 12 places.')
     else:
         competition['numberOfPlaces'] = int(competition['numberOfPlaces']) - places_required
         flash('Great-booking complete!')
