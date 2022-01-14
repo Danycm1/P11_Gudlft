@@ -1,6 +1,6 @@
 import json
 
-from flask import Flask, render_template, request, redirect, flash, url_for
+from flask import Flask, render_template, request, redirect, flash, url_for, session
 
 
 def load_clubs():
@@ -59,10 +59,21 @@ def purchase_places():
     club = [c for c in clubs if c['name'] == request.form['club']][0]
     places_required = int(request.form['places'])
 
-    if places_required > 12:
+    if not session.get('competition'):
+        session['competition'] = {}
+
+    compdict = session['competition']
+
+    # if key not in dict, initialize places counter
+    if competition['name'] not in compdict:
+        compdict[competition['name']] = 0
+
+    if (places_required + compdict[competition['name']]) > 12:
         flash('You cannot purchase more than 12 places.')
     else:
         competition['numberOfPlaces'] = int(competition['numberOfPlaces']) - places_required
+        compdict[competition['name']] += places_required
+        session['competition'] = compdict
         flash('Great-booking complete!')
     return render_template('welcome.html', club=club, competitions=competitions)
 
