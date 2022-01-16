@@ -1,5 +1,3 @@
-import time
-
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.firefox.service import Service
@@ -17,7 +15,7 @@ def test_logout():
     button.send_keys("john@simplylift.co")
     button.submit()
 
-    time.sleep(1)
+    driver.implicitly_wait(1)
 
     button_logout = driver.find_element(By.LINK_TEXT, "Logout")
     button_logout.click()
