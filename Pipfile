@@ -35,6 +35,7 @@ webdriver-manager = "==3.5.2"
 wsproto = "==1.0.0"
 async_generator = "==1.10"
 pyOpenSSL = "==21.0.0"
+locust = "*"
 
 [dev-packages]
 
