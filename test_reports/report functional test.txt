@@ -1,0 +1,11 @@
+===================================================================================================== test session starts ======================================================================================================
+platform win32 -- Python 3.10.1, pytest-6.2.5, py-1.11.0, pluggy-1.0.0
+rootdir: C:\Users\Dany\PycharmProjects\P11_Gudlft
+collected 5 items
+
+test\functional_test\test_book_places.py .                                                                                                                                                                                [ 20%]
+test\functional_test\test_display_points_page.py .                                                                                                                                                                        [ 40%]
+test\functional_test\test_login.py ..                                                                                                                                                                                     [ 80%]
+test\functional_test\test_logout.py .                                                                                                                                                                                     [100%]
+
+====================================================================================================== 5 passed in 37.19s ======================================================================================================
