@@ -6,7 +6,7 @@ from webdriver_manager.firefox import GeckoDriverManager
 from selenium.webdriver.support import expected_conditions as ec
 
 
-def test_login_with_correct_email():
+def test_show_club_point_page():
     service = Service(GeckoDriverManager().install(), log_path='test/functional_test/geckodriver.log')
     driver = webdriver.Firefox(service=service)
     driver.get('http://127.0.0.1:5000/')
