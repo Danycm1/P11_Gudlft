@@ -27,3 +27,4 @@ def test_booking_12_places():
     WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.CLASS_NAME, 'message')))
 
     assert "Great-booking complete! you bought 12 places" in driver.find_element(By.CLASS_NAME, 'message').text
+    driver.quit()
