@@ -29,6 +29,6 @@ def test_login_with_wrong_email():
     button.send_keys("wrong@example.com")
     button.submit()
 
-    WebDriverWait(driver, 10).until(ec.title_is('GUDLFT Registration'))
-    assert "GUDLFT Registration" in driver.title
+    WebDriverWait(driver, 10).until(ec.url_to_be('http://127.0.0.1:5000/showSummary'))
+    assert "Summary | GUDLFT Registration" not in driver.title
     driver.quit()
