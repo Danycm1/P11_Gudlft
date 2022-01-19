@@ -21,10 +21,10 @@ def test_booking_12_places():
     button_book_place.click()
 
     button_place = driver.find_element(By.NAME, "places")
-    button_place.send_keys("12")
+    button_place.send_keys("4")
     button_place.submit()
 
     WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.CLASS_NAME, 'message')))
 
-    assert "Great-booking complete! you bought 12 places" in driver.find_element(By.CLASS_NAME, 'message').text
+    assert "Great-booking complete! you bought 4 places" in driver.find_element(By.CLASS_NAME, 'message').text
     driver.quit()

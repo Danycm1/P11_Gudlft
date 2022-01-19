@@ -27,7 +27,7 @@ def test_deduce_points_from_club_when_booking_places(client):
 
 def test_booking_successful(client):
     response = client.post('/purchasePlaces',
-                           data={'competition': 'Openclassrooms', 'club': 'Simply Lift', 'places': '12'})
+                           data={'competition': 'Openclassrooms', 'club': 'Simply Lift', 'places': '4'})
 
     data = response.data.decode()
     assert response.status_code == 200
@@ -45,8 +45,9 @@ def test_booking_zero_or_less_places(client):
 
 def test_booking_more_places_than_available(client):
     response = client.post('/purchasePlaces',
-                           data={'competition': 'Openclassrooms small', 'club': 'Iron Temple', 'places': '4'})
+                           data={'competition': 'Openclassrooms small', 'club': 'She Lifts', 'places': '4'})
 
     data = response.data.decode()
+    print(data)
     assert response.status_code == 200
     assert "You cannot purchase more places than available." in data
