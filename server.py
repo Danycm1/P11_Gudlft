@@ -1,4 +1,5 @@
 import json
+from datetime import datetime
 
 from flask import Flask, render_template, request, redirect, flash, url_for
 
@@ -21,6 +22,8 @@ app.secret_key = 'something_special'
 competitions = load_competitions()
 clubs = load_clubs()
 
+current_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
 
 @app.route('/')
 def index():
@@ -35,7 +38,7 @@ def show_summary():
     """
     try:
         club = [club for club in clubs if club['email'] == request.form['email']][0]
-        return render_template('welcome.html', club=club, competitions=competitions)
+        return render_template('welcome.html', club=club, competitions=competitions, date=current_date)
     except IndexError:
         flash('Email is invalid. Please try again.')
         return render_template('index.html')
@@ -50,7 +53,7 @@ def book(competition, club):
         return render_template('booking.html', club=found_club, competition=found_competition)
     else:
         flash("Something went wrong-please try again")
-        return render_template('welcome.html', club=club, competitions=competitions)
+        return render_template('welcome.html', club=club, competitions=competitions, date=current_date)
 
 
 @app.route('/purchasePlaces', methods=['POST'])
@@ -59,12 +62,14 @@ def purchase_places():
     club = [c for c in clubs if c['name'] == request.form['club']][0]
     places_required = int(request.form['places'])
 
-    if places_required > 12:
+    if datetime.now() > datetime.strptime(competition["date"], "%Y-%m-%d %H:%M:%S"):
+        flash('You cannot purchase places from past competition')
+    elif places_required > 12:
         flash('You cannot purchase more than 12 places.')
     else:
         competition['numberOfPlaces'] = int(competition['numberOfPlaces']) - places_required
         flash(f'Great-booking complete! you bought {places_required} places')
-    return render_template('welcome.html', club=club, competitions=competitions)
+    return render_template('welcome.html', club=club, competitions=competitions, date=current_date)
 
 
 # TODO: Add route for points display
