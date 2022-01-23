@@ -75,8 +75,11 @@ def purchase_places():
         flash('You cannot purchase places from past competition')
     elif (places_required + compdict[competition['name']]) > 12:
         flash('You cannot purchase more than 12 places.')
+    elif int(club['points']) < places_required:
+        flash('Not enough points to purchase.')
     else:
         competition['numberOfPlaces'] = int(competition['numberOfPlaces']) - places_required
+        club['points'] = int(club['points']) - places_required
         compdict[competition['name']] += places_required
         session['competition'] = compdict
         flash(f'Great-booking complete! you bought {places_required} places')
