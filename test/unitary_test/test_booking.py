@@ -9,7 +9,7 @@ def test_booking_past_competition(client):
 
 def test_booking_more_than_12_places(client):
     response = client.post('/purchasePlaces',
-                           data={'competition': 'Spring Festival', 'club': 'Simply Lift', 'places': '13'})
+                           data={'competition': 'Openclassrooms', 'club': 'Simply Lift', 'places': '13'})
 
     data = response.data.decode()
     assert response.status_code == 200
@@ -18,7 +18,7 @@ def test_booking_more_than_12_places(client):
 
 def test_deduce_points_from_club_when_booking_places(client):
     response = client.post('/purchasePlaces',
-                           data={'competition': 'Spring Festival', 'club': 'Iron Temple', 'places': '5'})
+                           data={'competition': 'Openclassrooms', 'club': 'Iron Temple', 'places': '5'})
 
     data = response.data.decode()
     assert response.status_code == 200
